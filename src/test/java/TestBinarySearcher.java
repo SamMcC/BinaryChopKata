@@ -33,6 +33,24 @@ public class TestBinarySearcher {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @Parameters(method = "parametersForValueNotInArray")
+    public void testSearchForValueBySplitReturnsMinusOneForValueNotInArray(int[] testArray,
+                                                                           int value) {
+        int expected = -1;
+        int actual = binarySearcher.searchForValueInArrayBySplit(testArray, value);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @Parameters(method = "parametersForValueInArray")
+    public void testSearchForValueBySplitReturnsLocationOfValueInArray(int[] testArray,
+                                                                       int value,
+                                                                       int expected) {
+        int actual = binarySearcher.searchForValueInArrayBySplit(testArray, value);
+        assertEquals(expected, actual);
+    }
+
     private Object[] parametersForValueNotInArray() {
         int[] i = {};
         int[] j = {1};
