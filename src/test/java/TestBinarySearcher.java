@@ -51,6 +51,24 @@ public class TestBinarySearcher {
         assertEquals(expected, actual);
     }
 
+    @Test
+    @Parameters(method = "parametersForValueNotInArray")
+    public void testSearchForValueByRecursionReturnsMinusOneForValueNotInArray(int[] testArray,
+                                                                           int value) {
+        int expected = -1;
+        int actual = binarySearcher.searchForValueInArrayByRecursion(testArray, value);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @Parameters(method = "parametersForValueInArray")
+    public void testSearchForValueByRecursionReturnsLocationOfValueInArray(int[] testArray,
+                                                                       int value,
+                                                                       int expected) {
+        int actual = binarySearcher.searchForValueInArrayByRecursion(testArray, value);
+        assertEquals(expected, actual);
+    }
+
     private Object[] parametersForValueNotInArray() {
         int[] i = {};
         int[] j = {1};

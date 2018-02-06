@@ -1,3 +1,5 @@
+import java.util.Collection;
+
 public class BinarySearcher {
     public int searchForValueInArray(int[] inputArray, int value) {
         int count = 0;
@@ -29,6 +31,28 @@ public class BinarySearcher {
         }
 
         return result;
+    }
+    public int searchForValueInArrayByRecursion(int[] inputArray, int value){
+        int startIndex = 0;
+        if(startIndex < inputArray.length) {
+            return recurseOrReturn(inputArray, value, startIndex);
+        }
+        return -1;
+    }
+
+    private int searchForValueInArrayByRecursion(int[] inputArray, int value, int startIndex){
+        if(startIndex < inputArray.length) {
+            return recurseOrReturn(inputArray, value, startIndex);
+        }
+        return -1;
+    }
+
+    private int recurseOrReturn(int[] inputArray, int value, int startIndex) {
+        if(inputArray[startIndex] == value){
+            return startIndex;
+        }else{
+            return searchForValueInArrayByRecursion(inputArray, value, ++startIndex);
+        }
     }
 
     private int correctIfTooHighOrTooLow(int currentIndex, float arrayLength) {
