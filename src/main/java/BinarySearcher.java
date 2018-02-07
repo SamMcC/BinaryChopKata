@@ -1,4 +1,6 @@
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class BinarySearcher {
     public int searchForValueInArray(int[] inputArray, int value) {
@@ -12,7 +14,7 @@ public class BinarySearcher {
         return -1;
     }
 
-    public int searchForValueInArrayBySplit(int[] inputArray, int value){
+    public int searchForValueInArrayByAdaptiveSearch(int[] inputArray, int value){
         float arrayLength = inputArray.length;
         float currentAttempt = 1;
         int currentIndex = (int) arrayLength-1;
@@ -32,12 +34,33 @@ public class BinarySearcher {
 
         return result;
     }
+
     public int searchForValueInArrayByRecursion(int[] inputArray, int value){
         int startIndex = 0;
         if(startIndex < inputArray.length) {
             return recurseOrReturn(inputArray, value, startIndex);
         }
         return -1;
+    }
+
+    public int searchForValueInArrayByRandomWalk(int[] inputArray, int value){
+        int arrayLength = inputArray.length;
+        List<Integer> arrayOfGuesses = getListOfIndices(arrayLength);
+        for (int i : arrayOfGuesses){
+            if (inputArray[i] == value){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private List<Integer> getListOfIndices(int arrayLength) {
+        List<Integer> arrayOfGuesses = new ArrayList<>();
+        for (int i = 0; i<arrayLength; i++){
+            arrayOfGuesses.add(i);
+        }
+        Collections.shuffle(arrayOfGuesses);
+        return arrayOfGuesses;
     }
 
     private int searchForValueInArrayByRecursion(int[] inputArray, int value, int startIndex){
