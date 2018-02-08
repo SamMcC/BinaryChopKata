@@ -3,9 +3,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class BinarySearcher {
-    public int searchForValueInArray(int[] inputArray, int value) {
+    public int searchForValueInArrayByLoop(int[] inputArray, int value) {
         int count = 0;
         for (Integer i : inputArray){
+            if(valueIsGreaterThanCurrentValue(value, inputArray[count])){
+                return -1;
+            }
             if(value == i){
                 return count;
             }
@@ -52,6 +55,40 @@ public class BinarySearcher {
             }
         }
         return -1;
+    }
+
+    public int searchForValueInArrayByRecursiveChop(int[]inputArray, int value){
+        int arrayLength = inputArray.length;
+        if (arrayLength == 0 || inputArray[0] > value || inputArray[arrayLength-1] < value){
+            return -1;
+        }
+        if(inputArray[0] == value){
+            return 0;
+        }
+
+
+        int halfArrayIndex = arrayLength/2;
+
+        int[] firstHalfOfArray = new int[halfArrayIndex];
+        int[] secondHalfOfArray = new int[arrayLength - halfArrayIndex];
+        System.arraycopy(inputArray, 0, firstHalfOfArray, 0, firstHalfOfArray.length);
+        for (int i = 0; i < secondHalfOfArray.length; i++){
+            secondHalfOfArray[i] = inputArray[i+halfArrayIndex];
+        } // System.arrayCopy doesn't work on this half for some reason, seriously, I spent about an hour testing it.
+
+        int outputValue;
+        if(inputArray[halfArrayIndex] > value){
+            outputValue = searchForValueInArrayByAdaptiveSearch(firstHalfOfArray, value);
+        }else{
+            int newValue;
+            newValue = searchForValueInArrayByAdaptiveSearch(secondHalfOfArray, value);
+            if (newValue != -1){
+                outputValue = halfArrayIndex + newValue;
+            }else{
+                return -1;
+            }
+        }
+        return outputValue;
     }
 
     private List<Integer> getListOfIndices(int arrayLength) {

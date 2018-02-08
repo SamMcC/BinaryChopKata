@@ -20,7 +20,7 @@ public class TestBinarySearcher {
     public void testSearchForValueInArrayReturnsMinusOneForValueNotInArray(int[] testArray,
                                                                            int value) {
         int expected = -1;
-        int actual = binarySearcher.searchForValueInArray(testArray, value);
+        int actual = binarySearcher.searchForValueInArrayByLoop(testArray, value);
         assertEquals(expected, actual);
     }
 
@@ -29,7 +29,7 @@ public class TestBinarySearcher {
     public void testSearchForValueInArrayReturnsLocationOfValueInArray(int[] testArray,
                                                                        int value,
                                                                        int expected) {
-        int actual = binarySearcher.searchForValueInArray(testArray, value);
+        int actual = binarySearcher.searchForValueInArrayByLoop(testArray, value);
         assertEquals(expected, actual);
     }
 
@@ -84,6 +84,24 @@ public class TestBinarySearcher {
                                                                            int value,
                                                                            int expected) {
         int actual = binarySearcher.searchForValueInArrayByRandomWalk(testArray, value);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @Parameters(method = "parametersForValueNotInArray")
+    public void testSearchForValueByRecursiveChopReturnsMinusOneForValueNotInArray(int[] testArray,
+                                                                                int value) {
+        int expected = -1;
+        int actual = binarySearcher.searchForValueInArrayByRecursiveChop(testArray, value);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @Parameters(method = "parametersForValueInArray")
+    public void testSearchForValueByRecursiveChopReturnsLocationOfValueInArray(int[] testArray,
+                                                                            int value,
+                                                                            int expected) {
+        int actual = binarySearcher.searchForValueInArrayByRecursiveChop(testArray, value);
         assertEquals(expected, actual);
     }
 
